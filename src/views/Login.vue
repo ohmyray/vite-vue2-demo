@@ -42,6 +42,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { fetch } from '../util/http';
 
 interface IUser {
   username: string;
@@ -65,6 +66,13 @@ export default class Login extends Vue {
     ],
   };
   handleSubmit() {
+    fetch.post('http://localhost:3000/basic-api/login', this.userForm).then(response => {
+      let {result} = response.data
+      if(result) {
+        localStorage.setItem("r-token", result.token)
+        this.$router.push({ path: '/' })
+      }
+    })
     console.log("this.$refs.ruleForm2", this.$refs.ruleForm2);
   }
 }

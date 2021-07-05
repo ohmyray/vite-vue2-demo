@@ -1,18 +1,45 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <div id="map"></div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from 'src/components/HelloWorld.vue'; // @ is an alias to /src
-
+import { Component, Vue } from "vue-property-decorator";
+import { mapActions, mapGetters } from "vuex";
 @Component({
-  components: {
-    HelloWorld,
-  },
+  components: {},
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  map: any = null;
+  constructor() {
+    super();
+    this.map = new WebGIS.Map({
+      container: "map",
+      style: "webgis://styles/portal",
+      center: [113.23, 23.16],
+      zoom: 9,
+      controls: [{ name: "scale", position: "bottom-left" }],
+    });
+    this.map.on("load", () => {
+      this.$store.commit("App/setMap", this.map);
+      const div = document.createElement("div");
+      div.id = "extend-area";
+      div.style.position = "absolute";
+      div.style.top = "0";
+      div.style.left = "0";
+      document.getElementById("map")?.appendChild(div);
+      console.log(this.$store.getters["App/getMap"]);
+    });
+    this.map.on('zoom', (e)=> {
+      this.$store.commit('App/setZoom', this.map.instance.getZoom())
+    })
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+#map {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+</style>

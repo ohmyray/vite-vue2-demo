@@ -7,10 +7,17 @@ import ElementUI from 'element-ui';
 
 Vue.use(ElementUI)
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
+Vue.config.performance = true;
 
-new Vue({
+const app = new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount('#app');
+
+window['store'] = store
+
+setTimeout(() => {
+  console.log('[main]', app,store.state)
+}, 1000);

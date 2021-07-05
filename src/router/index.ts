@@ -30,10 +30,9 @@ const router = new VueRouter({
 // 注册路由
 router.beforeEach((to, from, next) => {
   let token = localStorage.getItem("r-token");
-  // if (!token && from.path !== "/login") next({ path: "/login" })
-
-  console.log("(to, from, next)", token, to.path, from.path, next);
-  // next(); // 放行
+  if (to.name == "Login") next();
+  else if(!token) next({path: '/login'})
+  else next()
 });
 
 export default router;

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 import { fetch } from '../util/http';
 
 interface IUser {
@@ -52,28 +52,28 @@ interface IUser {
 @Component
 export default class Login extends Vue {
   private userForm: IUser = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   };
   private checked: boolean = false;
   private logining: boolean = false;
   private rules2: any = {
     username: [
-      { required: true, message: "please enter your account", trigger: "blur" },
+      { required: true, message: 'please enter your account', trigger: 'blur' },
     ],
     password: [
-      { required: true, message: "enter your password", trigger: "blur" },
+      { required: true, message: 'enter your password', trigger: 'blur' },
     ],
   };
-  handleSubmit() {
-    fetch.post('http://localhost:3000/basic-api/login', this.userForm).then(response => {
-      let {result} = response.data
-      if(result) {
-        localStorage.setItem("r-token", result.token)
-        this.$router.push({ path: '/' })
+  public handleSubmit() {
+    fetch.post('http://localhost:3000/basic-api/login', this.userForm).then((response) => {
+      const {result} = response.data;
+      if (result) {
+        localStorage.setItem('r-token', result.token);
+        this.$router.push({ path: '/' });
       }
-    })
-    console.log("this.$refs.ruleForm2", this.$refs.ruleForm2);
+    });
+    console.log('this.$refs.ruleForm2', this.$refs.ruleForm2);
   }
 }
 </script>

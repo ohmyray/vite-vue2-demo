@@ -5,7 +5,7 @@ import store from './store';
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from 'element-ui';
 
-Vue.use(ElementUI)
+Vue.use(ElementUI);
 
 Vue.config.productionTip = true;
 Vue.config.performance = true;
@@ -16,8 +16,8 @@ const app = new Vue({
   render: (h) => h(App),
 }).$mount('#app');
 
-window['store'] = store
+// window.store = store;
 
-setTimeout(() => {
-  console.log('[main]', app,store.state)
-}, 1000);
+// setTimeout(() => {
+//   console.log('[main]', app, store.state);
+// }, 1000);

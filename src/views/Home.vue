@@ -3,35 +3,46 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { mapActions, mapGetters } from "vuex";
+import { Component, Vue } from 'vue-property-decorator';
+import {Card} from '../packages/card';
+
 @Component({
   components: {},
 })
 export default class Home extends Vue {
-  map: any = null;
+  public map: any = null;
   constructor() {
     super();
+
+  }
+
+  public created() {
     this.map = new WebGIS.Map({
-      container: "map",
-      style: "webgis://styles/portal",
+      container: 'map',
+      style: 'webgis://styles/portal',
       center: [113.23, 23.16],
       zoom: 9,
-      controls: [{ name: "scale", position: "bottom-left" }],
+      controls: [{ name: 'scale', position: 'bottom-left' }],
     });
-    this.map.on("load", () => {
-      this.$store.commit("App/setMap", this.map);
-      const div = document.createElement("div");
-      div.id = "extend-area";
-      div.style.position = "absolute";
-      div.style.top = "0";
-      div.style.left = "0";
-      document.getElementById("map")?.appendChild(div);
-      console.log(this.$store.getters["App/getMap"]);
+    this.map.on('load', () => {
+      this.$store.commit('App/setMap', this.map);
+      const div = document.createElement('div');
+      div.id = 'extend-area';
+      div.style.position = 'absolute';
+      div.style.top = '0';
+      div.style.left = '0';
+      document.getElementById('map')?.appendChild(div);
+      console.log(this.$store.getters['App/getMap']);
     });
-    this.map.on('zoom', (e)=> {
-      this.$store.commit('App/setZoom', this.map.instance.getZoom())
-    })
+    this.map.on('zoom', (e) => {
+      this.$store.commit('App/setZoom', this.map.instance.getZoom());
+    });
+  }
+
+  public mounted() {
+    console.log('mounted...', this.map);
+    const card = new Card();
+    card.init();
   }
 }
 </script>

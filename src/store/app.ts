@@ -3,17 +3,17 @@ const state = {
   mapZoomLevel: 0,
 };
 const mutations = {
-    setMap( state,instance) {
-        state.mapInstance = instance
-        console.warn('地图初始化完成')
+    setMap( state, instance) {
+        state.mapInstance = instance;
+        console.warn('地图初始化完成');
     },
     setZoom( state, level) {
-        state.mapZoomLevel = level
-        console.log(level)
-    }
+        state.mapZoomLevel = level;
+        console.log(level);
+    },
 };
 const actions = {
-    
+
 };
 const getters = {
   getMap(state) {

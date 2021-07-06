@@ -1,7 +1,7 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance } from 'axios';
 
 const fetch = axios.create({
-  baseURL: "",
+  baseURL: '',
   timeout: 20000,
 });
 
